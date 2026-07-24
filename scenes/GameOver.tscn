@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://d02xb07gg43iv"]
+
+[ext_resource type="Script" path="res://scripts/gameover.gd" id="1_gameover"]
+[ext_resource type="Texture2D" path="res://assets/menus/gameover.png" id="2_gameover_bg"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gameover")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gameover_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -180.0
+offset_right = 180.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TryAgainButton" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(280, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.05, 0.05, 1)
+theme_override_colors/font_hover_color = Color(1, 0.2, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
+text = "Try Again"
+flat = true
+
+[node name="ExitButton" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+flat = true
+
+[node name="AlarmSound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="Buttons/TryAgainButton" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_pressed"]

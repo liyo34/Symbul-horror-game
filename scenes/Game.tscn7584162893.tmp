@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://d12i5hec4luiw"]
+
+[ext_resource type="Script" uid="uid://b3suogv1b0c21" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Texture2D" uid="uid://deu2lnanvl7rg" path="res://assets/cameras/bedwithout_entity.png" id="2_bed"]
+[ext_resource type="Texture2D" uid="uid://lpnt5ijwaesp" path="res://assets/cameras/storagewithout_entity.png" id="3_stor"]
+[ext_resource type="Texture2D" uid="uid://ce053magt5kj4" path="res://assets/jumpscare/Jumpscare.png" id="4_js"]
+[ext_resource type="AudioStream" uid="uid://sidy6vfajtvy" path="res://assets/sounds/slowbreathing.mp3" id="5_breath"]
+[ext_resource type="AudioStream" uid="uid://jlmfsw8fj511" path="res://assets/sounds/laugh.mp3" id="6_laugh"]
+
+[sub_resource type="Shader" id="Shader_static"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float n = fract(sin(dot(UV + vec2(TIME), vec2(12.9898, 78.233))) * 43758.5453);
+	COLOR = vec4(vec3(n), 0.25);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_static"]
+shader = SubResource("Shader_static")
+
+[node name="Game" type="Node2D" unique_id=1380203415]
+script = ExtResource("1_game")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1622405302]
+
+[node name="BedroomView" type="TextureRect" parent="CanvasLayer" unique_id=1763273720]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bed")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CameraView" type="Control" parent="CanvasLayer" unique_id=2082153464]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CameraImage" type="TextureRect" parent="CanvasLayer/CameraView" unique_id=912470065]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_stor")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CamLabel" type="Label" parent="CanvasLayer/CameraView" unique_id=1619648640]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 25.0
+offset_right = 260.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "Cam 1"
+
+[node name="Cam1Button" type="Button" parent="CanvasLayer/CameraView" unique_id=169821874]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 560.0
+offset_right = 160.0
+offset_bottom = 610.0
+text = "Cam 1"
+
+[node name="Cam2Button" type="Button" parent="CanvasLayer/CameraView" unique_id=668126107]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 560.0
+offset_right = 300.0
+offset_bottom = 610.0
+text = "Cam 2"
+
+[node name="Cam3Button" type="Button" parent="CanvasLayer/CameraView" unique_id=92905400]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 560.0
+offset_right = 440.0
+offset_bottom = 610.0
+text = "Cam 3"
+
+[node name="StaticOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1316434849]
+visible = false
+material = SubResource("ShaderMaterial_static")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ViewCameraButton" type="Button" parent="CanvasLayer" unique_id=1174552069]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -70.0
+offset_right = 90.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+text = "View Camera"
+
+[node name="CloseEyesButton" type="Button" parent="CanvasLayer" unique_id=329111302]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -70.0
+offset_right = 180.0
+offset_bottom = -20.0
+grow_vertical = 0
+focus_mode = 0
+text = "Close Eyes"
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer" unique_id=736171233]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "12:00 AM"
+horizontal_alignment = 2
+
+[node name="EyesClosedOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1102575880]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CloseEyesImage" type="TextureRect" parent="CanvasLayer" unique_id=1252120524]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -90.0
+offset_right = 250.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Jumpscare" type="TextureRect" parent="CanvasLayer" unique_id=1807422997]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_js")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DemoOverlay" type="ColorRect" parent="CanvasLayer" unique_id=737754276]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DemoLabel" type="Label" parent="CanvasLayer" unique_id=1024822248]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -40.0
+offset_right = 200.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 72
+text = "Demo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartFadeOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1962192646]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EnemyTimer" type="Timer" parent="." unique_id=301967415]
+
+[node name="NightTimer" type="Timer" parent="." unique_id=1465248329]
+
+[node name="BedroomTimer" type="Timer" parent="." unique_id=145780727]
+one_shot = true
+
+[node name="BedroomBreathing" type="AudioStreamPlayer" parent="." unique_id=1900920451]
+stream = ExtResource("5_breath")
+
+[node name="AmbientTimer" type="Timer" parent="." unique_id=1259294024]
+one_shot = true
+
+[node name="AmbientSound" type="AudioStreamPlayer" parent="." unique_id=1923933888]
+
+[node name="LaughSound" type="AudioStreamPlayer" parent="." unique_id=599297011]
+stream = ExtResource("6_laugh")
+
+[node name="JumpscareSound" type="AudioStreamPlayer" parent="." unique_id=1005925709]
+
+[node name="BellSound" type="AudioStreamPlayer" parent="." unique_id=1335918481]
+
+[node name="AlarmSound" type="AudioStreamPlayer" parent="." unique_id=158389378]
+
+[connection signal="pressed" from="CanvasLayer/CameraView/Cam1Button" to="." method="_on_cam_1_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CameraView/Cam2Button" to="." method="_on_cam_2_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CameraView/Cam3Button" to="." method="_on_cam_3_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ViewCameraButton" to="." method="_on_view_camera_button_pressed"]
+[connection signal="button_down" from="CanvasLayer/CloseEyesButton" to="." method="_on_close_eyes_button_button_down"]
+[connection signal="button_up" from="CanvasLayer/CloseEyesButton" to="." method="_on_close_eyes_button_button_up"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="NightTimer" to="." method="_on_night_timer_timeout"]
+[connection signal="timeout" from="BedroomTimer" to="." method="_on_bedroom_timer_timeout"]
+[connection signal="timeout" from="AmbientTimer" to="." method="_on_ambient_timer_timeout"]

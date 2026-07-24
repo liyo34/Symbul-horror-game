@@ -1,0 +1,311 @@
+[gd_scene format=3 uid="uid://esibvdk8y0sw"]
+
+[ext_resource type="Script" uid="uid://ydxd7u036cqy" path="res://scripts/menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://btjxyv4hpnp7m" path="res://assets/menus/menu.png" id="2_menu_bg"]
+[ext_resource type="Texture2D" uid="uid://c6q2eq4jq03p" path="res://assets/logo/logo.png" id="3_logo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_credits"]
+content_margin_left = 24.0
+content_margin_top = 20.0
+content_margin_right = 24.0
+content_margin_bottom = 20.0
+bg_color = Color(0.03, 0.005, 0.005, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.06, 0.06, 0.85)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0.3, 0, 0, 0.65)
+shadow_size = 16
+
+[node name="Menu" type="Control" unique_id=717221471]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="TextureRect" parent="." unique_id=266381242]
+modulate = Color(0.72, 0.68, 0.68, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_menu_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HorrorGrade" type="ColorRect" parent="." unique_id=1964609638]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0, 0, 0.28)
+
+[node name="LeftPanel" type="MarginContainer" parent="." unique_id=1338788787]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 56.0
+offset_right = 600.0
+offset_bottom = -56.0
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="LeftVBox" type="VBoxContainer" parent="LeftPanel" unique_id=590201173]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ContentColumn" type="VBoxContainer" parent="LeftPanel/LeftVBox" unique_id=1935161928]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="LogoWrap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=763946629]
+custom_minimum_size = Vector2(480, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="LogoGlow" type="TextureRect" parent="LeftPanel/LeftVBox/ContentColumn/LogoWrap" unique_id=1012295635]
+modulate = Color(0.55, 0.02, 0.02, 0.35)
+layout_mode = 1
+offset_top = 4.0
+offset_right = 480.0
+offset_bottom = 204.0
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Logo" type="TextureRect" parent="LeftPanel/LeftVBox/ContentColumn/LogoWrap" unique_id=774544734]
+layout_mode = 1
+offset_right = 480.0
+offset_bottom = 200.0
+texture = ExtResource("3_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LogoGap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=1677318689]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=2073788410]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.58, 0.56, 0.9)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.75)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 14
+text = "Survive until 7 AM. Watch the cameras.
+Close your eyes when it reaches your room."
+autowrap_mode = 3
+
+[node name="DescGap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=2015021152]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="DemoLabel" type="Label" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=1207956627]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.1, 0.08, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 26
+text = "— DEMO —"
+
+[node name="MenuGap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=64593440]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=1513349973]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.78, 0.74, 0.72, 1)
+theme_override_colors/font_focus_color = Color(0.95, 0.12, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(0.65, 0.04, 0.04, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.12, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "> PLAY"
+flat = true
+alignment = 0
+
+[node name="PlayGap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=2038931963]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="CreditsButton" type="Button" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=570120479]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.78, 0.74, 0.72, 1)
+theme_override_colors/font_focus_color = Color(0.95, 0.12, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(0.65, 0.04, 0.04, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.12, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "> CREDITS"
+flat = true
+
+[node name="CreditsGap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=1862839787]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="FullVersionButton" type="Button" parent="LeftPanel/LeftVBox/ContentColumn"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.78, 0.74, 0.72, 1)
+theme_override_colors/font_focus_color = Color(0.95, 0.12, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(0.65, 0.04, 0.04, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.12, 0.1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "> FULL VERSION"
+flat = true
+
+[node name="FullVersionGap" type="Control" parent="LeftPanel/LeftVBox/ContentColumn"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="CreditsLabel" type="Label" parent="LeftPanel/LeftVBox/ContentColumn" unique_id=601214929]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.45, 0.42, 0.4, 0.8)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.5)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 12
+text = "Created by Francis LLoyd Catog  ·  Godot Engine"
+autowrap_mode = 3
+
+[node name="CreditsPanel" type="PanelContainer" parent="." unique_id=1970249122]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -170.0
+offset_right = 300.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_credits")
+
+[node name="CreditsVBox" type="VBoxContainer" parent="CreditsPanel" unique_id=1412654604]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="CreditsTitle" type="Label" parent="CreditsPanel/CreditsVBox" unique_id=226384372]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.1, 0.08, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 34
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="CreditsBody" type="Label" parent="CreditsPanel/CreditsVBox" unique_id=1214125017]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.68, 0.66, 1)
+theme_override_font_sizes/font_size = 17
+text = "SYMBUL Horror Demo
+
+Created by Franc
+Godot Engine"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CreditsCloseButton" type="Button" parent="CreditsPanel/CreditsVBox" unique_id=1307140985]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.12, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.2, 0.18, 1)
+theme_override_font_sizes/font_size = 18
+text = "Close"
+flat = true
+
+[node name="FullVersionPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -200.0
+offset_right = 350.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_credits")
+
+[node name="FullVersionVBox" type="VBoxContainer" parent="FullVersionPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FullVersionTitle" type="Label" parent="FullVersionPanel/FullVersionVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.1, 0.08, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "FULL VERSION - UPCOMING"
+horizontal_alignment = 1
+
+[node name="FullVersionBody" type="Label" parent="FullVersionPanel/FullVersionVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.68, 0.66, 1)
+theme_override_font_sizes/font_size = 16
+text = "• More new rooms
+• 8 entities
+• More nights
+• Items & life system
+• Difficulty settings
+• More approachable gameplay"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="FullVersionCloseButton" type="Button" parent="FullVersionPanel/FullVersionVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.12, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.2, 0.18, 1)
+theme_override_font_sizes/font_size = 18
+text = "Close"
+flat = true
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=1498625398]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="BellSound" type="AudioStreamPlayer" parent="." unique_id=667418358]
+
+[node name="ThemeSound" type="AudioStreamPlayer" parent="." unique_id=55223469]
+
+[connection signal="pressed" from="LeftPanel/LeftVBox/ContentColumn/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="LeftPanel/LeftVBox/ContentColumn/CreditsButton" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="CreditsPanel/CreditsVBox/CreditsCloseButton" to="." method="_on_credits_close_pressed"]
+[connection signal="pressed" from="LeftPanel/LeftVBox/ContentColumn/FullVersionButton" to="." method="_on_full_version_pressed"]
+[connection signal="pressed" from="FullVersionPanel/FullVersionVBox/FullVersionCloseButton" to="." method="_on_full_version_close_pressed"]

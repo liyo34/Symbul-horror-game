@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b0sqa6held054"]
+
+[ext_resource type="Texture2D" uid="uid://b1oqxrticy1xj" path="res://assets/cameras/basementwithout_entity.png" id="1_cvpoc"]
+
+[node name="Camera" type="Node2D" unique_id=527988756]
+
+[node name="BasementwithoutEntity" type="Sprite2D" parent="." unique_id=1128474407]
+position = Vector2(579.5, 316.50003)
+scale = Vector2(0.74934894, 0.6181641)
+texture = ExtResource("1_cvpoc")

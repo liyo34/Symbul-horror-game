@@ -1,0 +1,524 @@
+[gd_scene load_steps=11 format=3 uid="uid://d12i5hec4luiw"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Texture2D" path="res://assets/cameras/bedwithout_entity.png" id="2_bed"]
+[ext_resource type="Texture2D" path="res://assets/cameras/storagewithout_entity.png" id="3_stor"]
+[ext_resource type="Texture2D" path="res://assets/jumpscare/Jumpscare.png" id="4_js"]
+[ext_resource type="AudioStream" path="res://assets/sounds/slowbreathing.mp3" id="5_breath"]
+[ext_resource type="AudioStream" path="res://assets/sounds/laugh.mp3" id="6_laugh"]
+[ext_resource type="Texture2D" path="res://assets/generator/generator.png" id="7_generator"]
+[ext_resource type="Texture2D" path="res://assets/thanksforplaying/thanksforplaying.png" id="8_thanks"]
+
+[sub_resource type="Shader" id="Shader_static"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float n = fract(sin(dot(UV + vec2(TIME), vec2(12.9898, 78.233))) * 43758.5453);
+	COLOR = vec4(vec3(n), 0.25);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_static"]
+shader = SubResource("Shader_static")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BedroomView" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bed")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GeneratorView" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_generator")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GeneratorPowerLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 36
+text = "GENERATE POWER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GeneratorHoldLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "Hold W/E to Charge"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GeneratorBackButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -70.0
+offset_right = 90.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+focus_mode = 0
+
+[node name="CameraView" type="Control" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CameraImage" type="TextureRect" parent="CanvasLayer/CameraView"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_stor")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CamLabel" type="Label" parent="CanvasLayer/CameraView"]
+offset_left = 40.0
+offset_top = 25.0
+offset_right = 260.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "Cam 1"
+
+[node name="Cam1Button" type="Button" parent="CanvasLayer/CameraView"]
+offset_left = 40.0
+offset_top = 560.0
+offset_right = 160.0
+offset_bottom = 610.0
+text = "Cam 1"
+
+[node name="Cam2Button" type="Button" parent="CanvasLayer/CameraView"]
+offset_left = 180.0
+offset_top = 560.0
+offset_right = 300.0
+offset_bottom = 610.0
+text = "Cam 2"
+
+[node name="Cam3Button" type="Button" parent="CanvasLayer/CameraView"]
+offset_left = 320.0
+offset_top = 560.0
+offset_right = 440.0
+offset_bottom = 610.0
+text = "Cam 3"
+
+[node name="StaticOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_static")
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ViewCameraButton" type="Button" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -70.0
+offset_right = 90.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "View Camera"
+focus_mode = 0
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "12:00 AM"
+horizontal_alignment = 2
+
+[node name="BatteryLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 70.0
+offset_right = -20.0
+offset_bottom = 95.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Charge Tablet"
+horizontal_alignment = 2
+
+[node name="BatteryMeter" type="ProgressBar" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 100.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+value = 100.0
+max_value = 100.0
+show_percentage = false
+
+[node name="ElectricLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 130.0
+offset_right = -20.0
+offset_bottom = 155.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Electric Generator"
+horizontal_alignment = 2
+
+[node name="ElectricMeter" type="ProgressBar" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 160.0
+offset_right = -20.0
+offset_bottom = 180.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+value = 100.0
+max_value = 100.0
+show_percentage = false
+
+[node name="PowerWarning" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "POWER ALMOST DEPLETED!"
+horizontal_alignment = 1
+
+[node name="NoPowerMessage" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 28
+text = "NO POWER PLEASE CHARGE"
+horizontal_alignment = 1
+
+[node name="EyesClosedOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+mouse_filter = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CloseEyesImage" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -90.0
+offset_right = 250.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GeneratorLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 180.0
+offset_bottom = -75.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 16
+text = "GENERATOR"
+horizontal_alignment = 1
+
+[node name="GeneratorButton" type="Button" parent="CanvasLayer"]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -70.0
+offset_right = 180.0
+offset_bottom = -20.0
+grow_vertical = 0
+text = "Generator"
+focus_mode = 0
+
+[node name="Jumpscare" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_js")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="JumpscareRedSpike" type="ColorRect" parent="CanvasLayer"]
+visible = false
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0)
+
+[node name="DemoOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="DemoLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -40.0
+offset_right = 200.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 72
+text = "Demo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DemoExitButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 50.0
+offset_right = 80.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Exit"
+
+[node name="WinScreen" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_thanks")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PlayAgainButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Play Again"
+focus_mode = 0
+
+[node name="ExitButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Exit"
+focus_mode = 0
+
+[node name="StartFadeOverlay" type="ColorRect" parent="CanvasLayer"]
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ControlsOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="ControlsLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "CONTROLS:
+
+SPACE - Close Eyes
+Q - Close Camera/Generator
+W/E - Charge Generator (in Generator View)
+Click buttons to navigate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyTimer" type="Timer" parent="."]
+
+[node name="NightTimer" type="Timer" parent="."]
+
+[node name="BedroomTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BedroomBreathing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_breath")
+
+[node name="AmbientTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AmbientSound" type="AudioStreamPlayer" parent="."]
+
+[node name="LaughSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_laugh")
+
+[node name="JumpscareSound" type="AudioStreamPlayer" parent="."]
+
+[node name="BellSound" type="AudioStreamPlayer" parent="."]
+
+[node name="AlarmSound" type="AudioStreamPlayer" parent="."]
+
+[node name="GeneratorSound" type="AudioStreamPlayer" parent="."]
+
+[node name="ChargeSound" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/CameraView/Cam1Button" to="." method="_on_cam_1_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CameraView/Cam2Button" to="." method="_on_cam_2_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CameraView/Cam3Button" to="." method="_on_cam_3_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ViewCameraButton" to="." method="_on_view_camera_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GeneratorButton" to="." method="_on_generator_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GeneratorBackButton" to="." method="_on_generator_back_pressed"]
+[connection signal="button_down" from="CanvasLayer/GeneratorBackButton" to="." method="_on_generator_charge_down"]
+[connection signal="button_up" from="CanvasLayer/GeneratorBackButton" to="." method="_on_generator_charge_up"]
+[connection signal="pressed" from="CanvasLayer/PlayAgainButton" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="NightTimer" to="." method="_on_night_timer_timeout"]
+[connection signal="timeout" from="BedroomTimer" to="." method="_on_bedroom_timer_timeout"]
+[connection signal="timeout" from="AmbientTimer" to="." method="_on_ambient_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/DemoExitButton" to="." method="_on_demo_exit_pressed"]
