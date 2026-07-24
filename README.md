@@ -41,44 +41,6 @@ As tension builds, unexpected events, disturbing sounds, and intense jump scares
 
 ![Gameplay](assets/cameras/bedwith_entity.png)
 
-> *Replace or add more screenshots inside the `assets/demo/` folder.*
-
-Example:
-
-```text
-assets/cameras/
-├── hallwaywith_entity.png
-├── bedroomwithout_entity.png
-├── basementwith_entity.png
-├── storagewithout_entity.png
-```
-
-Then add them like this:
-
-```markdown
-## CCTV System
-
-![CCTV](assets/cameras/bedroomwithout_entity.png)
-
-## Bedroom
-
-![Bedroom](assets/cameras/bedroomwith_entity.png)
-
-## Hallway
-
-![Hallway](assets/cameras/hallwaywithout_entity.png)
-
-## Basement
-
-![Basement](assets/cameras/basementwith_entity.png)
-
-## Storage Room
-
-![Storage](assets/cameras/storagewith_entity.png)
-
-## Jumpscare
-
-![Jumpscare](assets/jumpscare/Jumpscare.png)
 ```
 
 ---
